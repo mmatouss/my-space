@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>~* xX_Goku_SSJ_Xx *~ (Son Goku's Official MySpace Profile 2007)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23ff6600%22 stroke=%22%23ffcc00%22 stroke-width=%225%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23cc0000%22>★</text></svg>">
+</head>
+<body>
+
+  <!-- Top MySpace Navigation Bar -->
+  <header class="myspace-navbar">
+    <div class="navbar-container">
+      <div class="nav-brand">
+        <span class="myspace-logo">my<span class="logo-space">space</span>.com</span>
+        <span class="nav-slogan">| a place for friends</span>
+      </div>
+      <div class="nav-search">
+        <input type="text" placeholder="Hledat na MySpace..." class="search-input">
+        <button class="search-btn">Hledat</button>
+      </div>
+      <nav class="nav-links">
+        <a href="#">Domů</a> |
+        <a href="#">Hledat Přátele</a> |
+        <a href="#">Hudba</a> |
+        <a href="#">Videa</a> |
+        <a href="#">Skupiny</a> |
+        <a href="#">Blogy</a> |
+        <a href="#">Fóra</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Profile Container -->
+  <main class="profile-wrapper">
+
+    <!-- Top Status Banner -->
+    <section class="profile-header-card">
+      <div class="header-left">
+        <h1 class="user-display-name">Son Goku ~* xX_SSJ_Goku_737_Xx *~</h1>
+        <p class="user-headline">„Chci bojovat s těmi nejsilnějšími ve vesmíru! A pak si dát obří nálož jídla! 🍖💥“</p>
+      </div>
+      <div class="header-right">
+        <div class="network-badge">
+          Goku je ve vaší <strong>Rozšířené Síti</strong> (Extended Network)
+        </div>
+        <div class="status-box">
+          <p><strong>Nálada:</strong> Hladový jako vlk 🍖😋</p>
+          <p><strong>Status:</strong> Trénuji v 100× gravitaci na cestě na Namek ☁️⚡</p>
+          <p><strong>Naposledy přihlášen:</strong> Dnes 14:32 (z Kinto-unu)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Super Saiyan Action Banner & Controls -->
+    <div class="action-bar">
+      <button id="ssj-toggle-btn" class="ssj-button">
+        ⚡ PROMĚNIT V SUPER SAIYANA (POWER UP!) ⚡
+      </button>
+      <div class="web-counter">
+        <span class="counter-label">Návštěv profilu:</span>
+        <span class="counter-number">0 0 9 0 0 1</span>
+        <span class="over-9000-badge">IT'S OVER 9000! 🔥</span>
+      </div>
+    </div>
+
+    <!-- 2-Column MySpace Layout -->
+    <div class="myspace-columns">
+
+      <!-- LEFT COLUMN -->
+      <aside class="left-column">
+
+        <!-- Avatar Box -->
+        <div class="box profile-pic-box">
+          <h2 class="box-title">Son Goku</h2>
+          <div class="avatar-container" id="goku-avatar-frame">
+            <div class="online-indicator">
+              <span class="online-dot"></span> GOKU JE ONLINE!
+            </div>
+            <!-- Goku SVG Graphic Avatar -->
+            <svg class="goku-avatar-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="auraGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffea00" stop-opacity="0.9"/>
+                  <stop offset="60%" stop-color="#ff6600" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#0066ff" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <!-- Aura -->
+              <circle cx="100" cy="110" r="90" fill="url(#auraGlow)" class="aura-pulse"/>
+              <!-- Background kame circle -->
+              <circle cx="100" cy="110" r="80" fill="#111827" stroke="#ff9900" stroke-width="4"/>
+              <!-- Hair Base / SSJ Hair -->
+              <path id="goku-hair" d="M 40 90 Q 20 40 50 30 Q 60 10 90 20 Q 110 5 130 25 Q 160 15 160 55 Q 185 65 170 95 Q 155 110 145 100 C 140 70 110 60 100 60 C 80 60 60 70 55 100 Z" fill="#1b1b1b"/>
+              <!-- Face -->
+              <polygon points="65,80 135,80 125,145 100,165 75,145" fill="#fcd5b5" stroke="#d99b66" stroke-width="2"/>
+              <!-- Eyes -->
+              <polygon points="75,100 92,102 88,110 75,106" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
+              <circle cx="84" cy="105" r="2.5" fill="#000" id="pupil-left"/>
+              <polygon points="108,102 125,100 125,106 112,110" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
+              <circle cx="116" cy="105" r="2.5" fill="#000" id="pupil-right"/>
+              <!-- Eyebrows -->
+              <path d="M 72 95 L 94 100" stroke="#000" stroke-width="4" stroke-linecap="round" id="brow-left"/>
+              <path d="M 106 100 L 128 95" stroke="#000" stroke-width="4" stroke-linecap="round" id="brow-right"/>
+              <!-- Mouth (Goku grin) -->
+              <path d="M 82 135 Q 100 150 118 135 Z" fill="#990000" stroke="#000" stroke-width="1.5"/>
+              <path d="M 86 137 Q 100 142 114 137" fill="#ffffff"/>
+              <!-- Gi (Orange Shirt & Blue Undershirt) -->
+              <path d="M 50 160 L 75 145 L 100 165 L 125 145 L 150 160 L 170 210 L 30 210 Z" fill="#ff6600"/>
+              <path d="M 75 145 L 100 165 L 125 145 L 115 185 L 85 185 Z" fill="#0044cc"/>
+              <!-- Kanji Symbol Turtle / Kaio -->
+              <circle cx="100" cy="190" r="14" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
+              <text x="100" y="196" font-size="14" font-weight="bold" text-anchor="middle" fill="#000">龜</text>
+            </svg>
+          </div>
+          <p class="gender-age">Muž, 36 let (fyzicky), Mount Paozu, ZEMĚ</p>
+        </div>
+
+        <!-- Contact Box -->
+        <div class="box contact-box">
+          <h2 class="box-title">Kontaktovat Gokua</h2>
+          <div class="contact-grid">
+            <a href="#comments-section" class="contact-item">
+              <span class="icon">✉️</span> Poslat zprávu
+            </a>
+            <a href="#comments-section" class="contact-item">
+              <span class="icon">➕</span> Přidat do Přátel
+            </a>
+            <a href="#comments-section" class="contact-item">
+              <span class="icon">⭐</span> Přidat do Oblíbených
+            </a>
+            <a href="#comments-section" class="contact-item">
+              <span class="icon">💬</span> Poslat Telepatii (Instant Msg)
+            </a>
+            <a href="#comments-section" class="contact-item">
+              <span class="icon">🚀</span> Přeposlat kamarádovi
+            </a>
+            <a href="#comments-section" class="contact-item">
+              <span class="icon">🚫</span> Blokovat (jen pro Friezu)
+            </a>
+          </div>
+        </div>
+
+        <!-- URL Box -->
+        <div class="box url-box">
+          <p><strong>MySpace URL:</strong></p>
+          <input type="text" readonly value="http://www.myspace.com/goku_official_ssj" class="url-input">
+        </div>
+
+        <!-- Details Box -->
+        <div class="box details-box">
+          <h2 class="box-title">Gokuo vy Detaily</h2>
+          <table class="details-table">
+            <tr>
+              <td class="table-label">Stav:</td>
+              <td class="table-val">Šťastně ženatý (s Chi-Chi ❤️)</td>
+            </tr>
+            <tr>
+              <td class="table-label">Orientace:</td>
+              <td class="table-val">Bojování, Jídlo & Zachraňování světa</td>
+            </tr>
+            <tr>
+              <td class="table-label">Znamení:</td>
+              <td class="table-val">Saiyan 🐒 / Dračí znamení 🐉</td>
+            </tr>
+            <tr>
+              <td class="table-label">Úroveň síly:</td>
+              <td class="table-val"><span class="highlight-power">OVER 9000!!! 💥</span></td>
+            </tr>
+            <tr>
+              <td class="table-label">Domov:</td>
+              <td class="table-val">Hora Paozu (Planeta Země)</td>
+            </tr>
+            <tr>
+              <td class="table-label">Povolání:</td>
+              <td class="table-val">Zeměkoule Protector / Nedobrovolný farmář 🌾</td>
+            </tr>
+            <tr>
+              <td class="table-label">Oblíbené jídlo:</td>
+              <td class="table-val">Pečené mamutí maso, Rámen, 50 misek rýže 🍜🍖</td>
+            </tr>
+            <tr>
+              <td class="table-label">Kinto-un řídičák:</td>
+              <td class="table-val">Ano (čisté srdce předpokladem ☁️)</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Interests Box -->
+        <div class="box interests-box">
+          <h2 class="box-title">Gokuo vy Zájmy</h2>
+          <div class="interest-group">
+            <span class="interest-heading">Obecné:</span>
+            <p>Trénování v 100x gravitaci, hledání Dragon Ballů s Shenronem, souboje na turnaji Tenkaichi Budokai, přeměna v Super Saiyana, spaní pod širým nebem.</p>
+          </div>
+          <div class="interest-group">
+            <span class="interest-heading">Oblíbená Hudba:</span>
+            <p>CHA-LA HEAD-CHA-LA, Rock the Dragon, Makafushigi Adventure, Bruce Faulconer DBZ Soundtracks, Heavy Metal při nabíjení Genki Dama!</p>
+          </div>
+          <div class="interest-group">
+            <span class="interest-heading">Oblíbené Filmy:</span>
+            <p>Cesta kolem světa za 80 dní, Filmy s Jackie Chanem, Všechny záznamy z bojových turnajů!</p>
+          </div>
+          <div class="interest-group">
+            <span class="interest-heading">Moji Hrdinové:</span>
+            <p>Mistr Roshi (Želví Poustevník), Děda Gohan, Král Kaio (i přes ty jeho hrozné vtipy), Whis a všichni bojovníci co nikdy nevzdávají boj!</p>
+          </div>
+        </div>
+
+        <!-- Retro Badges -->
+        <div class="box badges-box">
+          <h2 class="box-title">Odznaky & Certifikáty 2007</h2>
+          <div class="badges-flex">
+            <div class="badge">🔥 SENZU BEAN APPROVED</div>
+            <div class="badge">🐉 DRAGON BALL COLLECTOR</div>
+            <div class="badge">⭐ 4-STAR BALL OWNER</div>
+            <div class="badge">💥 KAMEHAMEHA MASTER</div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT COLUMN -->
+      <section class="right-column">
+
+        <!-- Retro MySpace Music Player -->
+        <div class="box music-player-box">
+          <div class="player-header">
+            <span class="player-title">🎵 MySpace Music Player - Goku's Battle Beats</span>
+            <span class="eq-icon">📊</span>
+          </div>
+          <div class="player-body">
+            <div class="now-playing-info">
+              <span class="music-note">🎶</span>
+              <div class="marquee-container">
+                <div class="marquee-text" id="now-playing-text">
+                  HRAJE: Hironobu Kageyama - CHA-LA HEAD-CHA-LA (Official DBZ Theme 2007)
+                </div>
+              </div>
+            </div>
+
+            <div class="player-controls">
+              <button class="player-btn" id="btn-prev">⏮️ Zpět</button>
+              <button class="player-btn play-btn" id="btn-play">▶️ Přehrát</button>
+              <button class="player-btn" id="btn-next">⏭️ Dále</button>
+              <div class="volume-container">
+                <span class="vol-label">Hlasitost:</span>
+                <input type="range" min="0" max="100" value="80" class="volume-slider" id="vol-slider">
+              </div>
+            </div>
+
+            <div class="visualizer">
+              <div class="bar bar1"></div>
+              <div class="bar bar2"></div>
+              <div class="bar bar3"></div>
+              <div class="bar bar4"></div>
+              <div class="bar bar5"></div>
+              <div class="bar bar6"></div>
+              <div class="bar bar7"></div>
+              <div class="bar bar8"></div>
+            </div>
+
+            <div class="playlist-dropdown">
+              <label for="track-select">Vybrat skladbu: </label>
+              <select id="track-select" class="track-select">
+                <option value="0">1. CHA-LA HEAD-CHA-LA (Opening Theme)</option>
+                <option value="1">2. Rock The Dragon (Faulconer Synth Mix)</option>
+                <option value="2">3. Super Saiyan Theme (Goku Power Up)</option>
+                <option value="3">4. Spirit Bomb (Genki Dama Symphony)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Goku's Blurb (About Me) -->
+        <div class="box blurb-box">
+          <h2 class="box-title">Gokuo vy Blurb (O Mně)</h2>
+
+          <div class="blurb-subheading">O mně:</div>
+          <div class="blurb-content">
+            <p class="glitter-text">✨ Welcome to my official MySpace profile! ✨</p>
+            <p>
+              Ahoj! Jsem <strong>Son Goku</strong> (ale můj saiyanský brácha a Vegeta mi říkají <em>Kakarot</em>). Narodil jsem se na planetě Vegeta, ale vyrostl jsem na Zemi na Hoře Paozu u mého milovaného dědečka Gohana!
+            </p>
+            <p>
+              Miluju dvě věci ze všeho nejvíce: <strong>BOJOVÁNÍ S SILNÝMI SOUPEŘI</strong> 🥊 a <strong>JÍDLO!</strong> 🍗🍜 Pokud máte rádi trénink, Senzu fazole nebo hledání sedmi dračích koulí, pak musíme být kámoši!
+            </p>
+            <p>
+              Mám skvělou manželku Chi-Chi (i když na mě občas křičí, když netrénuju na zkoušky nebo nepracuju na poli 😅) a dva super syny - Gohana a Gotena. Trénoval me Mistr Roshi, Král Kaio i Kami!
+            </p>
+
+            <div class="kamehameha-banner">
+              <span class="sparkle">💥</span> KA... ME... HA... ME... HA!!!!! <span class="sparkle">💥</span>
+            </div>
+          </div>
+
+          <div class="blurb-subheading">Koho bych chtěl potkat:</div>
+          <div class="blurb-content">
+            <p>
+              Chtěl bych potkat ty nejsilnější bojovníky z celého vesmíru 12! Pokud umíš lítat, střílet Ki blast, nebo jsi bůh zkázy, pošli mi žádost o přátelství!
+            </p>
+            <p>
+              Taky hledám někoho, kdo umí uvařit 100 porcí rámenu za minutu. 🍜
+            </p>
+          </div>
+        </div>
+
+        <!-- Goku's Friend Space (TOP 8) -->
+        <div class="box friends-box">
+          <h2 class="box-title">
+            Gokuo vy Přátelé (Friend Space)
+            <span class="friend-count">Goku má <span class="count-num">9001</span> Přátel.</span>
+          </h2>
+
+          <p class="top8-header"><strong>Gokuo vy TOP 8 Přátel:</strong></p>
+
+          <div class="top8-grid">
+
+            <!-- Friend 1: Krillin -->
+            <div class="friend-card">
+              <a href="#krillin" class="friend-name">Krillin (BFF)</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#ff9900" stroke-width="3"/>
+                  <!-- Bald head 6 dots -->
+                  <circle cx="42" cy="25" r="2" fill="#884400"/>
+                  <circle cx="50" cy="25" r="2" fill="#884400"/>
+                  <circle cx="58" cy="25" r="2" fill="#884400"/>
+                  <circle cx="42" cy="33" r="2" fill="#884400"/>
+                  <circle cx="50" cy="33" r="2" fill="#884400"/>
+                  <circle cx="58" cy="33" r="2" fill="#884400"/>
+                  <!-- Eyes -->
+                  <ellipse cx="38" cy="48" rx="6" ry="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                  <circle cx="38" cy="48" r="2" fill="#000"/>
+                  <ellipse cx="62" cy="48" rx="6" ry="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                  <circle cx="62" cy="48" r="2" fill="#000"/>
+                  <!-- Smile -->
+                  <path d="M 38 68 Q 50 78 62 68" fill="none" stroke="#000" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Nejlepší kámoš od dětství!“</span>
+            </div>
+
+            <!-- Friend 2: Bulma -->
+            <div class="friend-card">
+              <a href="#bulma" class="friend-name">Bulma Briefs</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#00ccff" stroke-width="3"/>
+                  <!-- Turquoise Hair -->
+                  <path d="M 20 50 Q 20 10 50 10 Q 80 10 80 50 Q 85 80 75 90 L 25 90 Z" fill="#00ccff"/>
+                  <circle cx="50" cy="50" r="30" fill="#fcd5b5"/>
+                  <!-- Eyes -->
+                  <ellipse cx="40" cy="48" rx="5" ry="7" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                  <circle cx="40" cy="48" r="2.5" fill="#0066cc"/>
+                  <ellipse cx="60" cy="48" rx="5" ry="7" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                  <circle cx="60" cy="48" r="2.5" fill="#0066cc"/>
+                  <!-- Lipstick Smile -->
+                  <path d="M 42 65 Q 50 72 58 65" fill="none" stroke="#cc0066" stroke-width="2.5"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Capsule Corp Geniálka 🤖“</span>
+            </div>
+
+            <!-- Friend 3: Vegeta -->
+            <div class="friend-card">
+              <a href="#vegeta" class="friend-name">Vegeta (Princ)</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#111" stroke="#ff0000" stroke-width="3"/>
+                  <!-- Flame Hair -->
+                  <path d="M 25 60 L 15 20 L 35 30 L 50 5 L 65 30 L 85 20 L 75 60 Z" fill="#000"/>
+                  <polygon points="30,55 70,55 65,85 50,95 35,85" fill="#fcd5b5"/>
+                  <!-- Scowl Brows -->
+                  <path d="M 33 60 L 47 67" stroke="#000" stroke-width="3"/>
+                  <path d="M 67 60 L 53 67" stroke="#000" stroke-width="3"/>
+                  <!-- Smirk -->
+                  <path d="M 40 80 L 60 78" stroke="#000" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Věčný Rival & Princ 👑“</span>
+            </div>
+
+            <!-- Friend 4: Gohan -->
+            <div class="friend-card">
+              <a href="#gohan" class="friend-name">Gohan (Syn)</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#9900cc" stroke-width="3"/>
+                  <!-- Black Hair & Glasses -->
+                  <path d="M 25 45 Q 30 15 50 15 Q 70 15 75 45 Z" fill="#111"/>
+                  <circle cx="50" cy="55" r="28" fill="#fcd5b5"/>
+                  <!-- Glasses -->
+                  <rect x="30" y="45" width="16" height="12" rx="2" fill="none" stroke="#000" stroke-width="2"/>
+                  <rect x="54" y="45" width="16" height="12" rx="2" fill="none" stroke="#000" stroke-width="2"/>
+                  <line x1="46" y1="51" x2="54" y2="51" stroke="#000" stroke-width="2"/>
+                  <path d="M 42 68 Q 50 73 58 68" fill="none" stroke="#000" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Můj šikovný akademický syn 📚“</span>
+            </div>
+
+            <!-- Friend 5: Piccolo -->
+            <div class="friend-card">
+              <a href="#piccolo" class="friend-name">Piccolo</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#2e7d32" stroke="#4caf50" stroke-width="3"/>
+                  <!-- Turban -->
+                  <rect x="25" y="15" width="50" height="25" rx="5" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
+                  <polygon points="35,40 65,40 60,85 50,90 40,85" fill="#4caf50"/>
+                  <!-- Antennas -->
+                  <line x1="40" y1="42" x2="30" y2="30" stroke="#000" stroke-width="2"/>
+                  <line x1="60" y1="42" x2="70" y2="30" stroke="#000" stroke-width="2"/>
+                  <circle cx="30" cy="30" r="3" fill="#ffeb3b"/>
+                  <circle cx="70" cy="30" r="3" fill="#ffeb3b"/>
+                  <!-- Serious mouth -->
+                  <line x1="42" y1="72" x2="58" y2="72" stroke="#000" stroke-width="2"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Pan Piccolo (Velkej Zelenáč) 🟢“</span>
+            </div>
+
+            <!-- Friend 6: Master Roshi -->
+            <div class="friend-card">
+              <a href="#roshi" class="friend-name">Mistr Roshi</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#fff3e0" stroke="#ff9800" stroke-width="3"/>
+                  <!-- Sunglasses & Beard -->
+                  <polygon points="25,40 75,40 70,58 30,58" fill="#e91e63" stroke="#000" stroke-width="1.5"/>
+                  <path d="M 25 60 Q 50 95 75 60 Z" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Želví Poustevník 🐢“</span>
+            </div>
+
+            <!-- Friend 7: King Kai -->
+            <div class="friend-card">
+              <a href="#kingkai" class="friend-name">Král Kaio</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#1e88e5" stroke="#9c27b0" stroke-width="3"/>
+                  <!-- Antennas & Sunglasses -->
+                  <line x1="40" y1="30" x2="25" y2="10" stroke="#000" stroke-width="3"/>
+                  <line x1="60" y1="30" x2="75" y2="10" stroke="#000" stroke-width="3"/>
+                  <circle cx="25" cy="10" r="4" fill="#000"/>
+                  <circle cx="75" cy="10" r="4" fill="#000"/>
+                  <rect x="30" y="45" width="40" height="15" rx="3" fill="#000"/>
+                  <!-- Big grin -->
+                  <path d="M 35 70 Q 50 85 65 70 Z" fill="#fff" stroke="#000" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Vtipálek & Učitel Kaio-kenu ☁️“</span>
+            </div>
+
+            <!-- Friend 8: Chi-Chi -->
+            <div class="friend-card">
+              <a href="#chichi" class="friend-name">Chi-Chi (Manželka)</a>
+              <div class="friend-img-frame">
+                <svg viewBox="0 0 100 100" class="friend-avatar">
+                  <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#d50000" stroke-width="3"/>
+                  <!-- Hair Bun -->
+                  <circle cx="50" cy="20" r="15" fill="#111"/>
+                  <circle cx="50" cy="50" r="28" fill="#fcd5b5"/>
+                  <!-- Angry Eyes & Mouth -->
+                  <path d="M 32 45 L 45 50" stroke="#000" stroke-width="2"/>
+                  <path d="M 68 45 L 55 50" stroke="#000" stroke-width="2"/>
+                  <ellipse cx="50" cy="68" rx="8" ry="10" fill="#900"/>
+                </svg>
+              </div>
+              <span class="friend-caption">„Láska mého života (NEŠTVEJ JI!) 🍳“</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Goku's Friends Comments Wall -->
+        <div class="box comments-box" id="comments-section">
+          <h2 class="box-title">
+            Komentáře od Přátel (Goku's Friend Comments)
+          </h2>
+
+          <div class="comments-container" id="comments-list">
+
+            <!-- Comment 1: Vegeta -->
+            <div class="comment-card">
+              <div class="comment-author">
+                <a href="#vegeta" class="author-name">Vegeta_Prince_SSJ</a>
+                <div class="author-avatar-small">
+                  <div class="mini-avatar veg-mini"></div>
+                </div>
+                <span class="comment-date">14.05.2007 o 18:42</span>
+              </div>
+              <div class="comment-body">
+                <p class="comment-text">
+                  KAKAROTE!!! <span class="retro-glitter">⚡⚡⚡</span><br>
+                  Jak si dovoluješ mít mě až na <strong>3. MÍSTĚ</strong> ve svém Top 8?! A KRILLIN JE PRVNÍ?! To je absolutní urážka mé královské saiyanské hrdosti! Zítra v 06:00 v Komoře Času a Duchu. Připrav se na porážku! 💥💥💥
+                </p>
+              </div>
+            </div>
+
+            <!-- Comment 2: Chi-Chi -->
+            <div class="comment-card">
+              <div class="comment-author">
+                <a href="#chichi" class="author-name">ChiChi_Mum_Official</a>
+                <div class="author-avatar-small">
+                  <div class="mini-avatar chi-mini"></div>
+                </div>
+                <span class="comment-date">14.05.2007 o 16:15</span>
+              </div>
+              <div class="comment-body">
+                <p class="comment-text">
+                  GOKU! 🍳<br>
+                  Okamžitě vypni ten počítač a jdi zorat zadní pole! Zase jsi utratil všechny naše Zeni za Senzu fazole! A Gohan se musí učit na přijímačky na univerzitu, tak ho neopovažuj tahat na trénink na Kaio planetu!
+                </p>
+              </div>
+            </div>
+
+            <!-- Comment 3: Krillin -->
+            <div class="comment-card">
+              <div class="comment-author">
+                <a href="#krillin" class="author-name">xX_Krillin_Destructo_Xx</a>
+                <div class="author-avatar-small">
+                  <div class="mini-avatar kri-mini"></div>
+                </div>
+                <span class="comment-date">13.05.2007 o 21:04</span>
+              </div>
+              <div class="comment-body">
+                <p class="comment-text">
+                  Jóóóó! Díky za 1. místo v Top 8 Goku! <span class="retro-sparkle">✨✨</span><br>
+                  Včera mě Cell sice zase málem vymazal, ale ten Kienzan byl těsný! Dáme zítra oběd u Roshiho? Peče se ryba! 🐟
+                </p>
+              </div>
+            </div>
+
+            <!-- Comment 4: Piccolo -->
+            <div class="comment-card">
+              <div class="comment-author">
+                <a href="#piccolo" class="author-name">Piccolo_Namekian_Wise</a>
+                <div class="author-avatar-small">
+                  <div class="mini-avatar pic-mini"></div>
+                </div>
+                <span class="comment-date">12.05.2007 o 11:30</span>
+              </div>
+              <div class="comment-body">
+                <p class="comment-text">
+                  Hmph. Tenhle MySpace je naprostá ztráta času. Ale když už jsi mě přidal... ujisti se, že Gohan pokračuje v meditaci. Makankosappo! 🌀
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Add Comment Form -->
+          <div class="add-comment-wrapper">
+            <h3 class="form-title">Napsat vzkaz na Gokuo vu zeď:</h3>
+            <form id="comment-form" class="comment-form">
+              <div class="form-group">
+                <label for="comment-author-input">Tvoje Jméno / Nickname:</label>
+                <input type="text" id="comment-author-input" class="form-control" placeholder="např. Yamcha_The_Wolf" required>
+              </div>
+
+              <div class="form-group">
+                <label for="comment-avatar-select">Vyber si Avatara:</label>
+                <select id="comment-avatar-select" class="form-control">
+                  <option value="🧡 Goku Fan">🧡 Goku Fan</option>
+                  <option value="🐉 Shenron">🐉 Shenron</option>
+                  <option value="🐢 Roshi Student">🐢 Roshi Student</option>
+                  <option value="💥 Saiyan Warrior">💥 Saiyan Warrior</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="comment-text-input">Tvojem zpráva (použij smajlíky a glitter text!):</label>
+                <textarea id="comment-text-input" class="form-control" rows="3" placeholder="Ahoj Goku! Jsi nejlepší bojovník! Ka-me-ha-me-ha!" required></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">
+                ✨ ODESLAT KOMENTÁŘ NA MYSPACE ✨
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="myspace-footer">
+      <p>© 2003-2008 MySpace.com. Všechna práva vyhrazena. Profil vytvořen Son Gokuem v roce 2007.</p>
+      <p>Dragon Ball Z / Akira Toriyama Fan Page Simulation. Powered by Senzu Beans & Saiyan Spirit.</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
