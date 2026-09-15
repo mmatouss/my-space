@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Son Goku | Oficiální Profil</title>
+  <title>Son Goku | Dračí Hra & Profil</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23ff6600%22 stroke=%22%23ffcc00%22 stroke-width=%225%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%231e3a8a%22>★</text></svg>">
 </head>
 <body>
 
-  <!-- Top Header Navigation -->
+  <!-- Top Navigation Header -->
   <header class="navbar">
     <div class="nav-container">
       <div class="brand">
         <span class="brand-logo">SON GOKU</span>
-        <span class="brand-sub"> Dragon Ball Z</span>
+        <span class="brand-sub">🐉 DRAGON BALL Z</span>
       </div>
-      <button id="ssj-toggle-btn" class="ssj-button">
-        ⚡ PROMĚNIT V SUPER SAIYANA ⚡
-      </button>
+      <div class="header-actions">
+        <button id="ssj-toggle-btn" class="ssj-button">
+          ⚡ SUPER SAIYAN ⚡
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- Main Container -->
   <main class="container">
 
-    <!-- Profile Hero Card -->
+    <!-- Goku Profile Hero -->
     <section class="hero-card">
       <div class="hero-avatar-wrapper">
         <div class="avatar-frame" id="goku-avatar-frame">
@@ -63,261 +65,141 @@
           </svg>
         </div>
         <div class="online-status">
-          <span class="online-dot"></span> ONLINE NA ZEMI
+          <span class="online-dot"></span> PRIRODENÝ WARRIOR
         </div>
       </div>
 
       <div class="hero-info">
-        <h1 class="user-title">Son Goku <span class="badge-ssj">Saiyan Warrior</span></h1>
-        <p class="user-quote">„Chci bojovat s těmi nejsilnějšími ve vesmíru! A pak si dát obří nálož jídla! 🍖💥“</p>
-
+        <h1 class="user-title">Son Goku <span class="badge-ssj" id="ssj-badge">Base Form</span></h1>
+        <p class="user-quote">„Pojďme chytat Dragon Bally a užít si zábavu! 🔮🍖“</p>
         <div class="stats-pills">
-          <div class="pill"><span class="pill-label">Úroveň síly:</span> <strong class="text-highlight">OVER 9000! 🔥</strong></div>
-          <div class="pill"><span class="pill-label">Status:</span> Trénuji v 100× gravitaci ☁️</div>
-          <div class="pill"><span class="pill-label">Domov:</span> Mount Paozu, Země 🏔️</div>
+          <div class="pill"><span class="pill-label">Síla:</span> <strong class="text-highlight" id="stat-power">OVER 9000! 🔥</strong></div>
+          <div class="pill"><span class="pill-label">Oblíbené:</span> Maso 🍖 & Boj 🥋</div>
+          <div class="pill"><span class="pill-label">Létající mrak:</span> Kinto-un ☁️</div>
         </div>
       </div>
     </section>
 
-    <!-- DBZ Theme Music Player -->
-    <section class="card music-card">
+    <!-- Goku's Dragon Ball Catching Mini-Game -->
+    <section class="card game-card" id="game-section">
       <div class="card-header">
-        <h2>🎵 Goku Theme Music Player</h2>
-        <span class="music-badge">DBZ OST</span>
-      </div>
-      <div class="card-body">
-        <audio id="audio-element" preload="auto"></audio>
-
-        <div class="player-top">
-          <div class="now-playing">
-            <span class="note-icon">🎶</span>
-            <span id="now-playing-text" class="now-playing-title">Není vybrána žádná skladba</span>
-          </div>
-
-          <div class="visualizer">
-            <div class="bar bar1"></div>
-            <div class="bar bar2"></div>
-            <div class="bar bar3"></div>
-            <div class="bar bar4"></div>
-            <div class="bar bar5"></div>
-            <div class="bar bar6"></div>
-            <div class="bar bar7"></div>
-            <div class="bar bar8"></div>
-          </div>
-        </div>
-
-        <div class="player-controls">
-          <button class="btn btn-secondary" id="btn-prev">⏮️ Zpět</button>
-          <button class="btn btn-primary" id="btn-play">▶️ Přehrát</button>
-          <button class="btn btn-secondary" id="btn-next">⏭️ Dále</button>
-
-          <div class="track-selector-wrapper">
-            <select id="track-select" class="track-select">
-              <option value="0">1. CHA-LA HEAD-CHA-LA (Official Theme)</option>
-              <option value="1">2. Super Saiyan Power Up Theme</option>
-            </select>
-          </div>
-
-          <div class="volume-box">
-            <span class="vol-icon">🔊</span>
-            <input type="range" min="0" max="100" value="80" id="vol-slider" class="volume-slider">
-          </div>
+        <h2>🎮 Gokuho Chytání Dragon Ballů</h2>
+        <div class="game-badges">
+          <span class="game-badge">Létající mrak Kinto-un</span>
         </div>
       </div>
-    </section>
 
-    <!-- Main Content Layout -->
-    <div class="content-grid">
-
-      <!-- Left Column -->
-      <aside class="sidebar">
-
-        <!-- Goku Stats & Details -->
-        <div class="card">
-          <div class="card-header">
-            <h3>Detaily Postavy</h3>
+      <div class="card-body game-body">
+        <!-- Game Stats Header -->
+        <div class="game-scoreboard">
+          <div class="score-box">
+            <span class="score-label">Skóre</span>
+            <span class="score-value" id="game-score">0</span>
           </div>
-          <div class="card-body">
-            <ul class="details-list">
-              <li><strong>Stav:</strong> Šťastně ženatý (s Chi-Chi ❤️)</li>
-              <li><strong>Rasa:</strong> Saiyan 🐒</li>
-              <li><strong>Mistři:</strong> Roshi, Král Kaio, Whis 🥋</li>
-              <li><strong>Povolání:</strong> Záchranář světa / Farmář 🌾</li>
-              <li><strong>Oblíbené jídlo:</strong> Pečené maso, Rámen, Rýže 🍖🍜</li>
-              <li><strong>Vozidlo:</strong> Kinto-un (Létající oblak ☁️)</li>
-            </ul>
+          <div class="score-box">
+            <span class="score-label">Nejlepší skóre</span>
+            <span class="score-value" id="game-highscore">0</span>
+          </div>
+          <div class="score-box">
+            <span class="score-label">Životy</span>
+            <span class="score-value" id="game-lives">❤️❤️❤️</span>
+          </div>
+          <div class="score-box">
+            <span class="score-label">Chyceno kouli</span>
+            <span class="score-value" id="game-balls-count">0 / 7</span>
           </div>
         </div>
 
-        <!-- Goku Zájmy -->
-        <div class="card">
-          <div class="card-header">
-            <h3>Gokuovy Zájmy</h3>
-          </div>
-          <div class="card-body">
-            <div class="interest-tag-cloud">
-              <span class="tag">Trénink</span>
-              <span class="tag">Dragon Bally</span>
-              <span class="tag">Tenkaichi Budokai</span>
-              <span class="tag">Kamehameha</span>
-              <span class="tag">Kaio-ken</span>
-              <span class="tag">Genki Dama</span>
-              <span class="tag">Jídlo</span>
+        <!-- Game Canvas Container -->
+        <div class="game-canvas-wrapper">
+          <canvas id="game-canvas" width="700" height="400"></canvas>
+
+          <!-- Overlay Menu for Start / Game Over -->
+          <div id="game-overlay" class="game-overlay">
+            <div class="overlay-content">
+              <h3 id="overlay-title">Chyť všech 7 Dragon Ballů! 🔮</h3>
+              <p id="overlay-desc">Pohybuj Gokuem na mraku Kinto-un vlevo a vpravo. Chytěj Dragon Bally (🔮) a Masíčka (🍖) pro body a zdraví! Vyhýbej se meteoritům (☄️) a závažím (🏋️)!</p>
+              <button id="start-game-btn" class="btn btn-start">🚀 Spustit Hru</button>
             </div>
           </div>
         </div>
 
+        <!-- Touch / On-screen Game Controls -->
+        <div class="game-controls">
+          <button id="btn-left" class="ctrl-btn">◀️ Vlevo</button>
+          <button id="btn-action" class="ctrl-btn ctrl-btn-center">⚡ Turbo Boost</button>
+          <button id="btn-right" class="ctrl-btn">Vpravo ▶️</button>
+        </div>
+        <p class="game-hint">Tip: Můžeš použít šipky na klávesnici (⬅️ ➡️) nebo A/D, či tlačítka výše.</p>
+      </div>
+    </section>
+
+    <!-- Quick Info & Comments Section -->
+    <div class="content-grid">
+      <!-- Left Column: Goku Quick Bio -->
+      <aside class="sidebar">
+        <div class="card">
+          <div class="card-header">
+            <h3>🥋 O Gokuovi</h3>
+          </div>
+          <div class="card-body">
+            <p class="bio-text">
+              Son Goku je saiyanský válečník, záchranář Země a milovník dobrého jídla. S mrakem Kinto-un brázdí oblohu a sbírá 7 legedárních drakových koulí!
+            </p>
+            <div class="friends-mini">
+              <h4>Přátelé:</h4>
+              <div class="tags-container">
+                <span class="tag">Krillin 🧑‍ď</span>
+                <span class="tag">Vegeta 👑</span>
+                <span class="tag">Bulma 🔬</span>
+                <span class="tag">Gohan 🎓</span>
+                <span class="tag">Piccolo 👽</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </aside>
 
-      <!-- Right Column -->
+      <!-- Right Column: Interactive Fan Board -->
       <section class="main-content">
-
-        <!-- O Mně / Blurb -->
         <div class="card">
           <div class="card-header">
-            <h3>O Mně</h3>
-          </div>
-          <div class="card-body bio-body">
-            <p>
-              Ahoj! Jsem <strong>Son Goku</strong> (můj saiyanský bratři a Vegeta mi říkají <em>Kakarot</em>). Narodil jsem se na planetě Vegeta, ale vyrostl jsem na Zemi u mého milovaného dědečka Gohana!
-            </p>
-            <p>
-              Miluju dvě věci ze všeho nejvíce: <strong>BOJOVÁNÍ SE SILNÝMI SOUPEŘI</strong> 🥊 a <strong>JÍDLO!</strong> 🍗 Pokud máte rádi trénink nebo hledání sedmi dračích koulí, pak musíme být kámoši!
-            </p>
-            <div class="kame-banner">
-              💥 KA... ME... HA... ME... HA!!!!! 💥
-            </div>
-          </div>
-        </div>
-
-        <!-- Friends Space -->
-        <div class="card">
-          <div class="card-header">
-            <h3>Přátelé (TOP 8)</h3>
-            <span class="sub-text">9001 Přátel</span>
-          </div>
-          <div class="card-body">
-            <div class="friends-grid">
-
-              <div class="friend-card">
-                <div class="friend-avatar-box">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#ff6600" stroke-width="3"/>
-                    <circle cx="42" cy="25" r="2" fill="#884400"/>
-                    <circle cx="50" cy="25" r="2" fill="#884400"/>
-                    <circle cx="58" cy="25" r="2" fill="#884400"/>
-                    <ellipse cx="38" cy="48" rx="6" ry="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
-                    <circle cx="38" cy="48" r="2" fill="#000"/>
-                    <ellipse cx="62" cy="48" rx="6" ry="8" fill="#fff" stroke="#000" stroke-width="1.5"/>
-                    <circle cx="62" cy="48" r="2" fill="#000"/>
-                    <path d="M 38 68 Q 50 78 62 68" fill="none" stroke="#000" stroke-width="2"/>
-                  </svg>
-                </div>
-                <strong class="friend-name">Krillin</strong>
-                <span class="friend-role">Nejlepší kámoš</span>
-              </div>
-
-              <div class="friend-card">
-                <div class="friend-avatar-box">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#00ccff" stroke-width="3"/>
-                    <path d="M 20 50 Q 20 10 50 10 Q 80 10 80 50 Z" fill="#00ccff"/>
-                    <circle cx="50" cy="55" r="25" fill="#fcd5b5"/>
-                    <ellipse cx="40" cy="52" rx="5" ry="7" fill="#fff" stroke="#000" stroke-width="1.5"/>
-                    <circle cx="40" cy="52" r="2.5" fill="#0066cc"/>
-                    <ellipse cx="60" cy="52" rx="5" ry="7" fill="#fff" stroke="#000" stroke-width="1.5"/>
-                    <circle cx="60" cy="52" r="2.5" fill="#0066cc"/>
-                    <path d="M 42 68 Q 50 74 58 68" fill="none" stroke="#cc0066" stroke-width="2"/>
-                  </svg>
-                </div>
-                <strong class="friend-name">Bulma</strong>
-                <span class="friend-role">Geniální vědkyně</span>
-              </div>
-
-              <div class="friend-card">
-                <div class="friend-avatar-box">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#1e293b" stroke="#ef4444" stroke-width="3"/>
-                    <path d="M 25 60 L 15 20 L 35 30 L 50 5 L 65 30 L 85 20 L 75 60 Z" fill="#0f172a"/>
-                    <polygon points="30,55 70,55 65,85 50,95 35,85" fill="#fcd5b5"/>
-                    <path d="M 33 60 L 47 67" stroke="#000" stroke-width="3"/>
-                    <path d="M 67 60 L 53 67" stroke="#000" stroke-width="3"/>
-                  </svg>
-                </div>
-                <strong class="friend-name">Vegeta</strong>
-                <span class="friend-role">Rival & Princ</span>
-              </div>
-
-              <div class="friend-card">
-                <div class="friend-avatar-box">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#fcd5b5" stroke="#a855f7" stroke-width="3"/>
-                    <path d="M 25 45 Q 30 15 50 15 Q 70 15 75 45 Z" fill="#111"/>
-                    <circle cx="50" cy="55" r="28" fill="#fcd5b5"/>
-                    <rect x="30" y="45" width="16" height="12" rx="2" fill="none" stroke="#000" stroke-width="2"/>
-                    <rect x="54" y="45" width="16" height="12" rx="2" fill="none" stroke="#000" stroke-width="2"/>
-                  </svg>
-                </div>
-                <strong class="friend-name">Gohan</strong>
-                <span class="friend-role">Syn</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Comments Wall -->
-        <div class="card">
-          <div class="card-header">
-            <h3>Vzkazy od Přátel</h3>
+            <h3>💬 Vzkazy pro Gokua</h3>
           </div>
           <div class="card-body">
             <div class="comments-list" id="comments-list">
-
               <div class="comment-item">
                 <div class="comment-header">
                   <strong class="author">Vegeta</strong>
-                  <span class="comment-date">Dnes 18:42</span>
+                  <span class="comment-date">Dnes</span>
                 </div>
-                <p class="comment-body-text">
-                  KAKAROTE!!! Připrav se na trénink v Komoře Času a Duchu. Zítra v 06:00! 💥
-                </p>
+                <p class="comment-body-text">Kakarote! Dokaž, že dokážeš chytit všech 7 Dragon Ballů bez ztráty života! 💥</p>
               </div>
-
               <div class="comment-item">
                 <div class="comment-header">
-                  <strong class="author">Chi-Chi</strong>
-                  <span class="comment-date">Dnes 16:15</span>
+                  <strong class="author">Mistr Roshi</strong>
+                  <span class="comment-date">Dnes</span>
                 </div>
-                <p class="comment-body-text">
-                  Goku! Okamžitě pojď zorat pole a pomoz Gohanovi s učením! 🍳
-                </p>
+                <p class="comment-body-text">Nezapomeň si po hře dát pořádnou porci rámenu! 🍜</p>
               </div>
-
             </div>
 
             <!-- Comment Form -->
             <form id="comment-form" class="comment-form">
-              <h4>Napsat vzkaz Gokuovi:</h4>
-              <div class="form-row">
-                <input type="text" id="comment-author-input" placeholder="Tvoje Jméno / Nick" required class="input-field">
+              <div class="form-row inline-form">
+                <input type="text" id="comment-author-input" placeholder="Tvoje Jméno" required class="input-field">
+                <input type="text" id="comment-text-input" placeholder="Napiš vzkaz Gokuovi..." required class="input-field flex-1">
+                <button type="submit" class="btn btn-primary">Odeslat 💥</button>
               </div>
-              <div class="form-row">
-                <textarea id="comment-text-input" placeholder="Napiš vzkaz..." required class="input-field textarea-field" rows="2"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Odeslat vzkaz 💥</button>
             </form>
-
           </div>
         </div>
-
       </section>
-
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>© Son Goku Fan Profile • Dragon Ball Z Theme</p>
+      <p>© Son Goku • Dragon Ball Z Catcher Game • Zábavný & Jednoduchý Web</p>
     </footer>
 
   </main>
