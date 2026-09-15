@@ -1,10 +1,10 @@
 // ==========================================================================
-// ~* GOKU MYSPACE PROFILE 2007 INTERACTIVE CONTROLS *~
+// ~* GOKU OFFICIAL PROFILE INTERACTIVE CONTROLS *~
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
   // ------------------------------------------------------------------------
-  // 1. Super Saiyan Mode Toggle (Power Up!)
+  // 1. Super Saiyan Mode Toggle
   // ------------------------------------------------------------------------
   const ssjBtn = document.getElementById("ssj-toggle-btn");
   let isSSJ = false;
@@ -15,95 +15,142 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.toggle("ssj-mode", isSSJ);
 
       if (isSSJ) {
-        ssjBtn.innerHTML = "🔥 SUPER SAIYAN POWEROVANÝ! (ZPĚT DO BASE FORMY) 🔥";
-        ssjBtn.style.background = "linear-gradient(180deg, #ffffff 0%, #ffee00 100%)";
-        ssjBtn.style.color = "#cc0000";
-        alert("AAAAAAAAAAHHH! OVER 9000!! Goku se proměnil v Super Saiyana! ⚡💥");
+        ssjBtn.innerHTML = "🔥 ZPĚT DO BASE FORMY 🔥";
+        ssjBtn.style.background = "linear-gradient(135deg, #fef08a 0%, #f59e0b 100%)";
+        ssjBtn.style.color = "#000";
       } else {
-        ssjBtn.innerHTML = "⚡ PROMĚNIT V SUPER SAIYANA (POWER UP!) ⚡";
-        ssjBtn.style.background = "linear-gradient(180deg, #ffcc00 0%, #ff6600 100%)";
-        ssjBtn.style.color = "#000000";
+        ssjBtn.innerHTML = "⚡ PROMĚNIT V SUPER SAIYANA ⚡";
+        ssjBtn.style.background = "";
+        ssjBtn.style.color = "";
       }
     });
   }
 
   // ------------------------------------------------------------------------
-  // 2. MySpace Music Player Simulation
+  // 2. Real HTML5 Audio Music Player
   // ------------------------------------------------------------------------
-  const tracks = [
-    "Hironobu Kageyama - CHA-LA HEAD-CHA-LA (Official DBZ Theme 2007)",
-    "Faulconer Productions - Rock The Dragon (Synth Metal Remix)",
-    "Bruce Faulconer - Super Saiyan Goku Theme (Ultimate Power Up)",
-    "DBZ Orchestra - Spirit Bomb Symphony (Genki Dama Theme)"
+  const playlist = [
+    {
+      title: "Hironobu Kageyama - CHA-LA HEAD-CHA-LA (DBZ Theme)",
+      src: "audio/chala_head_chala.wav"
+    },
+    {
+      title: "Super Saiyan Goku Theme (Power Up Beat)",
+      src: "audio/super_saiyan_theme.wav"
+    }
   ];
 
   let currentTrackIndex = 0;
   let isPlaying = false;
 
+  const audioElement = document.getElementById("audio-element");
   const playBtn = document.getElementById("btn-play");
   const prevBtn = document.getElementById("btn-prev");
   const nextBtn = document.getElementById("btn-next");
   const trackSelect = document.getElementById("track-select");
   const nowPlayingText = document.getElementById("now-playing-text");
-  const visualizer = document.querySelector(".visualizer");
+  const volSlider = document.getElementById("vol-slider");
+  const visualizerBars = document.querySelectorAll(".visualizer .bar");
 
-  function updateTrackDisplay() {
+  function loadTrack(index) {
+    currentTrackIndex = index;
+    const track = playlist[currentTrackIndex];
+    if (audioElement) {
+      audioElement.src = track.src;
+      audioElement.load();
+    }
     if (nowPlayingText) {
-      nowPlayingText.textContent = (isPlaying ? "HRAJE: " : "POZASTAVENO: ") + tracks[currentTrackIndex];
+      nowPlayingText.textContent = track.title;
     }
     if (trackSelect) {
-      trackSelect.value = currentTrackIndex.toString();
+      trackSelect.value = index.toString();
     }
+  }
+
+  function setVisualizerState(active) {
+    visualizerBars.forEach(bar => {
+      bar.style.animationPlayState = active ? "running" : "paused";
+    });
+  }
+
+  function playAudio() {
+    if (!audioElement) return;
+    audioElement.play().then(() => {
+      isPlaying = true;
+      if (playBtn) playBtn.textContent = "⏸️ Pozastavit";
+      setVisualizerState(true);
+    }).catch(err => {
+      console.log("Audio play blocked or unavailable:", err);
+      isPlaying = false;
+      if (playBtn) playBtn.textContent = "▶️ Přehrát";
+      setVisualizerState(false);
+    });
+  }
+
+  function pauseAudio() {
+    if (!audioElement) return;
+    audioElement.pause();
+    isPlaying = false;
+    if (playBtn) playBtn.textContent = "▶️ Přehrát";
+    setVisualizerState(false);
   }
 
   function togglePlayState() {
-    isPlaying = !isPlaying;
-    if (playBtn) {
-      playBtn.textContent = isPlaying ? "⏸️ Pozastavit" : "▶️ Přehrát";
+    if (isPlaying) {
+      pauseAudio();
+    } else {
+      playAudio();
     }
-    if (visualizer) {
-      const bars = visualizer.querySelectorAll(".bar");
-      bars.forEach(bar => {
-        bar.style.animationPlayState = isPlaying ? "running" : "paused";
-      });
-    }
-    updateTrackDisplay();
   }
 
-  if (playBtn) playBtn.addEventListener("click", togglePlayState);
+  if (playBtn) {
+    playBtn.addEventListener("click", togglePlayState);
+  }
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-      isPlaying = true;
-      if (playBtn) playBtn.textContent = "⏸️ Pozastavit";
-      updateTrackDisplay();
+      const newIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+      loadTrack(newIndex);
+      playAudio();
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-      isPlaying = true;
-      if (playBtn) playBtn.textContent = "⏸️ Pozastavit";
-      updateTrackDisplay();
+      const newIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(newIndex);
+      playAudio();
     });
   }
 
   if (trackSelect) {
     trackSelect.addEventListener("change", (e) => {
-      currentTrackIndex = parseInt(e.target.value, 10);
-      isPlaying = true;
-      if (playBtn) playBtn.textContent = "⏸️ Pozastavit";
-      updateTrackDisplay();
+      const index = parseInt(e.target.value, 10);
+      loadTrack(index);
+      playAudio();
     });
   }
 
-  // Start with visualizer running
-  isPlaying = true;
+  if (volSlider && audioElement) {
+    audioElement.volume = parseFloat(volSlider.value) / 100;
+    volSlider.addEventListener("input", (e) => {
+      audioElement.volume = parseFloat(e.target.value) / 100;
+    });
+  }
+
+  if (audioElement) {
+    audioElement.addEventListener("ended", () => {
+      const nextIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(nextIndex);
+      playAudio();
+    });
+  }
+
+  // Initial load
+  loadTrack(0);
 
   // ------------------------------------------------------------------------
-  // 3. Dynamic Comment Submission
+  // 3. Comment Submission Form
   // ------------------------------------------------------------------------
   const commentForm = document.getElementById("comment-form");
   const commentsList = document.getElementById("comments-list");
@@ -113,55 +160,28 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const authorInput = document.getElementById("comment-author-input");
-      const avatarSelect = document.getElementById("comment-avatar-select");
       const textInput = document.getElementById("comment-text-input");
 
-      const author = authorInput ? authorInput.value.trim() : "Anonymní Bojovník";
-      const avatarTag = avatarSelect ? avatarSelect.value : "🧡 Goku Fan";
+      const author = authorInput ? authorInput.value.trim() : "Anonymní";
       const text = textInput ? textInput.value.trim() : "";
 
       if (!author || !text) return;
 
-      const now = new Date();
-      const dateStr = `${now.getDate().toString().padStart(2, '0')}.${(now.getMonth() + 1).toString().padStart(2, '0')}.${now.getFullYear()} o ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-
-      // Create comment element
-      const commentCard = document.createElement("div");
-      commentCard.className = "comment-card";
-      commentCard.innerHTML = `
-        <div class="comment-author">
-          <a href="#" class="author-name">${escapeHtml(author)}</a>
-          <div class="author-avatar-small">
-            <div class="mini-avatar" style="background: #ff6600; display:flex; align-items:center; justify-content:center; font-size:18px;">
-              ${getAvatarEmoji(avatarTag)}
-            </div>
-          </div>
-          <span class="comment-date">${dateStr}</span>
+      const commentItem = document.createElement("div");
+      commentItem.className = "comment-item";
+      commentItem.innerHTML = `
+        <div class="comment-header">
+          <strong class="author">${escapeHtml(author)}</strong>
+          <span class="comment-date">Právě teď</span>
         </div>
-        <div class="comment-body">
-          <p class="comment-text">
-            <span class="retro-glitter">✨ [Vzkaz pro Gokua] ✨</span><br>
-            ${escapeHtml(text)}
-          </p>
-        </div>
+        <p class="comment-body-text">${escapeHtml(text)}</p>
       `;
 
-      // Insert at top of comments
-      commentsList.prepend(commentCard);
+      commentsList.prepend(commentItem);
 
-      // Reset form
       authorInput.value = "";
       textInput.value = "";
-
-      alert("Tvůj vzkaz byl úspěšně přidán na Gokuův MySpace profil! 🐉✨");
     });
-  }
-
-  function getAvatarEmoji(tag) {
-    if (tag.includes("Shenron")) return "🐉";
-    if (tag.includes("Roshi")) return "🐢";
-    if (tag.includes("Saiyan")) return "💥";
-    return "🧡";
   }
 
   function escapeHtml(str) {
