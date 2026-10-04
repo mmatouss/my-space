@@ -1,195 +1,386 @@
 // ==========================================================================
-// ~* GOKU OFFICIAL PROFILE INTERACTIVE CONTROLS *~
+// ISBN SCANNER FOR LIBRARIANS - CORE JAVASCRIPT
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ------------------------------------------------------------------------
-  // 1. Super Saiyan Mode Toggle
-  // ------------------------------------------------------------------------
-  const ssjBtn = document.getElementById("ssj-toggle-btn");
-  let isSSJ = false;
+  // --- DOM Elements ---
+  const btnToggleScanner = document.getElementById("btn-toggle-scanner");
+  const btnSwitchCamera = document.getElementById("btn-switch-camera");
+  const scannerPlaceholder = document.getElementById("scanner-placeholder");
+  const readerElement = document.getElementById("reader");
 
-  if (ssjBtn) {
-    ssjBtn.addEventListener("click", () => {
-      isSSJ = !isSSJ;
-      document.body.classList.toggle("ssj-mode", isSSJ);
+  const manualForm = document.getElementById("manual-isbn-form");
+  const isbnInput = document.getElementById("isbn-input");
 
-      if (isSSJ) {
-        ssjBtn.innerHTML = "🔥 ZPĚT DO BASE FORMY 🔥";
-        ssjBtn.style.background = "linear-gradient(135deg, #fef08a 0%, #f59e0b 100%)";
-        ssjBtn.style.color = "#000";
-      } else {
-        ssjBtn.innerHTML = "⚡ PROMĚNIT V SUPER SAIYANA ⚡";
-        ssjBtn.style.background = "";
-        ssjBtn.style.color = "";
+  const isbnListElement = document.getElementById("isbn-list");
+  const emptyStateElement = document.getElementById("empty-state");
+  const countBadgeElement = document.getElementById("isbn-count-badge");
+  const toastElement = document.getElementById("toast-message");
+
+  const btnCopyAll = document.getElementById("btn-copy-all");
+  const btnClearAll = document.getElementById("btn-clear-all");
+
+  // --- State Variables ---
+  let html5QrCode = null;
+  let isScanning = false;
+  let currentCameraId = null;
+  let availableCameras = [];
+  let cameraIndex = 0;
+  let lastScannedCode = "";
+  let lastScanTimestamp = 0;
+
+  const STORAGE_KEY = "librarian_isbn_list_v1";
+  let isbnList = loadIsbnList();
+
+  // Audio effect for scan confirmation
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function playBeep() {
+    try {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
       }
-    });
-  }
-
-  // ------------------------------------------------------------------------
-  // 2. Real HTML5 Audio Music Player
-  // ------------------------------------------------------------------------
-  const playlist = [
-    {
-      title: "Hironobu Kageyama - CHA-LA HEAD-CHA-LA (DBZ Theme)",
-      src: "audio/chala_head_chala.wav"
-    },
-    {
-      title: "Super Saiyan Goku Theme (Power Up Beat)",
-      src: "audio/super_saiyan_theme.wav"
-    }
-  ];
-
-  let currentTrackIndex = 0;
-  let isPlaying = false;
-
-  const audioElement = document.getElementById("audio-element");
-  const playBtn = document.getElementById("btn-play");
-  const prevBtn = document.getElementById("btn-prev");
-  const nextBtn = document.getElementById("btn-next");
-  const trackSelect = document.getElementById("track-select");
-  const nowPlayingText = document.getElementById("now-playing-text");
-  const volSlider = document.getElementById("vol-slider");
-  const visualizerBars = document.querySelectorAll(".visualizer .bar");
-
-  function loadTrack(index) {
-    currentTrackIndex = index;
-    const track = playlist[currentTrackIndex];
-    if (audioElement) {
-      audioElement.src = track.src;
-      audioElement.load();
-    }
-    if (nowPlayingText) {
-      nowPlayingText.textContent = track.title;
-    }
-    if (trackSelect) {
-      trackSelect.value = index.toString();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // 880Hz A5 note
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
+    } catch (e) {
+      // Audio playback failed or blocked
     }
   }
 
-  function setVisualizerState(active) {
-    visualizerBars.forEach(bar => {
-      bar.style.animationPlayState = active ? "running" : "paused";
-    });
+  function triggerVibration() {
+    if ("vibrate" in navigator) {
+      navigator.vibrate(100);
+    }
   }
 
-  function playAudio() {
-    if (!audioElement) return;
-    audioElement.play().then(() => {
-      isPlaying = true;
-      if (playBtn) playBtn.textContent = "⏸️ Pozastavit";
-      setVisualizerState(true);
-    }).catch(err => {
-      console.log("Audio play blocked or unavailable:", err);
-      isPlaying = false;
-      if (playBtn) playBtn.textContent = "▶️ Přehrát";
-      setVisualizerState(false);
-    });
+  // --- Toast Notification ---
+  let toastTimeout = null;
+  function showToast(message, type = "info") {
+    if (!toastElement) return;
+    toastElement.textContent = message;
+    toastElement.className = `toast-message toast-${type}`;
+    toastElement.style.display = "block";
+
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toastElement.style.display = "none";
+    }, 3500);
   }
 
-  function pauseAudio() {
-    if (!audioElement) return;
-    audioElement.pause();
-    isPlaying = false;
-    if (playBtn) playBtn.textContent = "▶️ Přehrát";
-    setVisualizerState(false);
+  // --- Storage Management ---
+  function loadIsbnList() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      console.error("Failed to load list from localStorage", e);
+      return [];
+    }
   }
 
-  function togglePlayState() {
-    if (isPlaying) {
-      pauseAudio();
+  function saveIsbnList() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(isbnList));
+    } catch (e) {
+      console.error("Failed to save list to localStorage", e);
+    }
+  }
+
+  // --- ISBN Formatting & Cleaning ---
+  function cleanIsbn(str) {
+    if (!str) return "";
+    // Normalize string: uppercase, remove spaces/dashes for comparison if needed
+    return str.trim();
+  }
+
+  function addIsbnToList(isbn, method = "scan") {
+    const cleaned = cleanIsbn(isbn);
+    if (!cleaned) {
+      showToast("Chyba: Zadané ISBN je prázdné.", "error");
+      return false;
+    }
+
+    // Check if already exists in list
+    const exists = isbnList.some(item => cleanIsbn(item.isbn) === cleaned);
+    if (exists) {
+      showToast(`ISBN "${cleaned}" již v seznamu existuje.`, "info");
+      return false;
+    }
+
+    const newItem = {
+      id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+      isbn: cleaned,
+      timestamp: new Date().toLocaleString("cs-CZ", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }),
+      method: method // 'scan' or 'manual'
+    };
+
+    isbnList.unshift(newItem); // add to top
+    saveIsbnList();
+    renderIsbnList();
+    playBeep();
+    triggerVibration();
+    showToast(`ISBN "${cleaned}" bylo úspěšně přidáno!`, "success");
+    return true;
+  }
+
+  function removeIsbnFromList(id) {
+    isbnList = isbnList.filter(item => item.id !== id);
+    saveIsbnList();
+    renderIsbnList();
+    showToast("Položka byla smazána.", "info");
+  }
+
+  function clearAllIsbns() {
+    if (isbnList.length === 0) return;
+    if (confirm("Opravdu chcete vymazat celý seznam naskenovaných ISBN?")) {
+      isbnList = [];
+      saveIsbnList();
+      renderIsbnList();
+      showToast("Seznam byl vyčištěn.", "info");
+    }
+  }
+
+  function copyAllToClipboard() {
+    if (isbnList.length === 0) {
+      showToast("Seznam je prázdný, není co kopírovat.", "info");
+      return;
+    }
+
+    const textToCopy = isbnList.map(item => item.isbn).join("\n");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast("Všechna ISBN byla zkopírována do schránky!", "success");
+      }).catch(err => {
+        fallbackCopyText(textToCopy);
+      });
     } else {
-      playAudio();
+      fallbackCopyText(textToCopy);
     }
   }
 
-  if (playBtn) {
-    playBtn.addEventListener("click", togglePlayState);
+  function fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      showToast("Všechna ISBN byla zkopírována do schránky!", "success");
+    } catch (err) {
+      showToast("Kopírování selhalo.", "error");
+    }
+    document.body.removeChild(textArea);
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      const newIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-      loadTrack(newIndex);
-      playAudio();
-    });
-  }
+  // --- Render UI ---
+  function renderIsbnList() {
+    if (!isbnListElement || !emptyStateElement || !countBadgeElement) return;
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      const newIndex = (currentTrackIndex + 1) % playlist.length;
-      loadTrack(newIndex);
-      playAudio();
-    });
-  }
+    countBadgeElement.textContent = `${isbnList.length} ${getPluralForm(isbnList.length, ['knihu', 'knihy', 'knih'])}`;
 
-  if (trackSelect) {
-    trackSelect.addEventListener("change", (e) => {
-      const index = parseInt(e.target.value, 10);
-      loadTrack(index);
-      playAudio();
-    });
-  }
+    if (isbnList.length === 0) {
+      isbnListElement.style.display = "none";
+      emptyStateElement.style.display = "flex";
+      return;
+    }
 
-  if (volSlider && audioElement) {
-    audioElement.volume = parseFloat(volSlider.value) / 100;
-    volSlider.addEventListener("input", (e) => {
-      audioElement.volume = parseFloat(e.target.value) / 100;
-    });
-  }
+    isbnListElement.style.display = "flex";
+    emptyStateElement.style.display = "none";
+    isbnListElement.innerHTML = "";
 
-  if (audioElement) {
-    audioElement.addEventListener("ended", () => {
-      const nextIndex = (currentTrackIndex + 1) % playlist.length;
-      loadTrack(nextIndex);
-      playAudio();
-    });
-  }
+    isbnList.forEach(item => {
+      const li = document.createElement("li");
+      li.className = "isbn-item";
 
-  // Initial load
-  loadTrack(0);
+      const methodTagClass = item.method === "scan" ? "tag-scan" : "tag-manual";
+      const methodTagLabel = item.method === "scan" ? "📷 Skener" : "✍️ Ručně";
 
-  // ------------------------------------------------------------------------
-  // 3. Comment Submission Form
-  // ------------------------------------------------------------------------
-  const commentForm = document.getElementById("comment-form");
-  const commentsList = document.getElementById("comments-list");
-
-  if (commentForm && commentsList) {
-    commentForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const authorInput = document.getElementById("comment-author-input");
-      const textInput = document.getElementById("comment-text-input");
-
-      const author = authorInput ? authorInput.value.trim() : "Anonymní";
-      const text = textInput ? textInput.value.trim() : "";
-
-      if (!author || !text) return;
-
-      const commentItem = document.createElement("div");
-      commentItem.className = "comment-item";
-      commentItem.innerHTML = `
-        <div class="comment-header">
-          <strong class="author">${escapeHtml(author)}</strong>
-          <span class="comment-date">Právě teď</span>
+      li.innerHTML = `
+        <div class="isbn-item-info">
+          <span class="isbn-value">${escapeHtml(item.isbn)}</span>
+          <div class="isbn-meta">
+            <span class="tag-method ${methodTagClass}">${methodTagLabel}</span>
+            <span>• ${escapeHtml(item.timestamp)}</span>
+          </div>
         </div>
-        <p class="comment-body-text">${escapeHtml(text)}</p>
+        <button class="btn-icon-danger btn-delete-item" data-id="${item.id}" title="Smazat">
+          🗑️
+        </button>
       `;
 
-      commentsList.prepend(commentItem);
-
-      authorInput.value = "";
-      textInput.value = "";
+      isbnListElement.appendChild(li);
     });
+
+    // Attach click handlers to delete buttons
+    document.querySelectorAll(".btn-delete-item").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = e.currentTarget.getAttribute("data-id");
+        removeIsbnFromList(id);
+      });
+    });
+  }
+
+  function getPluralForm(count, forms) {
+    if (count === 1) return forms[0];
+    if (count >= 2 && count <= 4) return forms[1];
+    return forms[2];
   }
 
   function escapeHtml(str) {
-    return str
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+    return str.replace(/[&<>"']/g, match => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    })[match]);
   }
+
+  // --- Barcode Scanner Integration ---
+  async function startScanner() {
+    try {
+      if (typeof Html5Qrcode === "undefined") {
+        showToast("Knihovna pro skenování se nenačtla. Zkontrolujte připojení.", "error");
+        return;
+      }
+
+      if (!html5QrCode) {
+        html5QrCode = new Html5Qrcode("reader");
+      }
+
+      availableCameras = await Html5Qrcode.getCameras();
+      if (!availableCameras || availableCameras.length === 0) {
+        showToast("Nebyly nalezeny žádné dostupné kamery.", "error");
+        return;
+      }
+
+      // Prefer back camera
+      const backCamera = availableCameras.find(cam =>
+        cam.label.toLowerCase().includes("back") ||
+        cam.label.toLowerCase().includes("zadní") ||
+        cam.label.toLowerCase().includes("environment")
+      );
+
+      currentCameraId = backCamera ? backCamera.id : availableCameras[0].id;
+      cameraIndex = availableCameras.findIndex(cam => cam.id === currentCameraId);
+
+      if (availableCameras.length > 1) {
+        btnSwitchCamera.style.display = "inline-flex";
+      } else {
+        btnSwitchCamera.style.display = "none";
+      }
+
+      const config = {
+        fps: 15,
+        qrbox: { width: 280, height: 160 },
+        aspectRatio: 1.777778,
+        formatsToSupport: [
+          Html5QrcodeSupportedFormats.EAN_13,
+          Html5QrcodeSupportedFormats.EAN_8,
+          Html5QrcodeSupportedFormats.UPC_A,
+          Html5QrcodeSupportedFormats.CODE_128
+        ]
+      };
+
+      scannerPlaceholder.style.display = "none";
+
+      await html5QrCode.start(
+        currentCameraId,
+        config,
+        onScanSuccess,
+        onScanError
+      );
+
+      isScanning = true;
+      btnToggleScanner.textContent = "⏹️ Zastavit skener";
+      btnToggleScanner.className = "btn btn-secondary btn-block";
+
+    } catch (err) {
+      console.error("Error starting camera scanner:", err);
+      showToast("Chyba při spouštění kamery: " + (err.message || err), "error");
+      stopScanner();
+    }
+  }
+
+  async function stopScanner() {
+    if (html5QrCode && isScanning) {
+      try {
+        await html5QrCode.stop();
+      } catch (err) {
+        console.error("Error stopping scanner:", err);
+      }
+    }
+
+    isScanning = false;
+    scannerPlaceholder.style.display = "flex";
+    btnToggleScanner.textContent = "▶️ Spustit skener";
+    btnToggleScanner.className = "btn btn-primary btn-block";
+    btnSwitchCamera.style.display = "none";
+  }
+
+  function onScanSuccess(decodedText, decodedResult) {
+    const now = Date.now();
+    // Cooldown to prevent multiple scans of the same code within 2 seconds
+    if (decodedText === lastScannedCode && (now - lastScanTimestamp) < 2000) {
+      return;
+    }
+
+    lastScannedCode = decodedText;
+    lastScanTimestamp = now;
+
+    addIsbnToList(decodedText, "scan");
+  }
+
+  function onScanError(errorMessage) {
+    // Ignore frame-by-frame decoding errors
+  }
+
+  // --- Event Listeners ---
+  btnToggleScanner.addEventListener("click", () => {
+    if (isScanning) {
+      stopScanner();
+    } else {
+      startScanner();
+    }
+  });
+
+  btnSwitchCamera.addEventListener("click", async () => {
+    if (!isScanning || availableCameras.length < 2) return;
+
+    cameraIndex = (cameraIndex + 1) % availableCameras.length;
+    currentCameraId = availableCameras[cameraIndex].id;
+
+    await stopScanner();
+    startScanner();
+  });
+
+  manualForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const value = isbnInput.value.trim();
+    if (value) {
+      const added = addIsbnToList(value, "manual");
+      if (added) {
+        isbnInput.value = "";
+      }
+    }
+  });
+
+  btnCopyAll.addEventListener("click", copyAllToClipboard);
+  btnClearAll.addEventListener("click", clearAllIsbns);
+
+  // Initial render
+  renderIsbnList();
 });
